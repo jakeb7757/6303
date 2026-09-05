@@ -1,0 +1,98 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Plane 50 knots
+      id: plane-50-knots
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Plane 50 knots
+        setup-command: ''
+        command: python3 plane.py
+        input: ''
+        expected-output: 50 knots
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Plane Saint Louis
+      id: plane-saint-louis
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Plane Saint Louis
+        setup-command: ''
+        command: python3 plane.py
+        input: ''
+        expected-output: landed in Paris
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Robot Sing
+      id: robot-sing
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Robot Sing
+        setup-command: ''
+        command: python3 robot.py
+        input: ''
+        expected-output: little lamb
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Blog post
+      id: blog-post
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Blog post
+        setup-command: ''
+        command: python3 blog.py
+        input: ''
+        expected-output: naming convention
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Blog likes
+      id: blog-likes
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Blog likes
+        setup-command: ''
+        command: python3 blog.py
+        input: ''
+        expected-output: '3'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Person error handling
+      id: person-error-handling
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Person error handling
+        setup-command: ''
+        command: python3 person.py
+        input: ''
+        expected-output: number between 1 and 130
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        PLANE-50-KNOTS_RESULTS: "${{steps.plane-50-knots.outputs.result}}"
+        PLANE-SAINT-LOUIS_RESULTS: "${{steps.plane-saint-louis.outputs.result}}"
+        ROBOT-SING_RESULTS: "${{steps.robot-sing.outputs.result}}"
+        BLOG-POST_RESULTS: "${{steps.blog-post.outputs.result}}"
+        BLOG-LIKES_RESULTS: "${{steps.blog-likes.outputs.result}}"
+        PERSON-ERROR-HANDLING_RESULTS: "${{steps.person-error-handling.outputs.result}}"
+      with:
+        runners: plane-50-knots,plane-saint-louis,robot-sing,blog-post,blog-likes,person-error-handling
