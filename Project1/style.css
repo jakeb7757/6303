@@ -1,0 +1,56 @@
+main {
+    width: 900px;
+    text-align: left;
+    margin: auto;
+}
+
+img {
+    margin: auto;
+    display: block;
+}
+
+.active > a {
+    background-color: blue;
+    color: white;
+}
+
+.menu1 {
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+.menu1 > a {
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    color: aliceblue;
+    background-color: black;
+    padding: 12px 30px 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s linear 0s, color 0.3s linear 0s;
+    margin: auto;
+}
+
+.menu1 > a:hover {
+    background-color: blue;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: #F1E9D2;
+    color: #5C4033;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 15px;
+}
